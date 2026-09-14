@@ -1,2 +1,2 @@
 # Transparent-Pickle2Python-Converter
-Convert Pickle binaries to executable Python code. 
+Pickle deserialization decoupled. Converts Pickle binaries to executable Python code. 
