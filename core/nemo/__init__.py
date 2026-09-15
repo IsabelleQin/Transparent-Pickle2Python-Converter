@@ -1,1 +1,0 @@
-from core.nemo.core import generate, execute
