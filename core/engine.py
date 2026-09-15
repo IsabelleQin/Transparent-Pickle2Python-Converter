@@ -25,6 +25,8 @@ class Convert(pickle._Unpickler):
         super().__init__(file, *args, **kwargs)
         self.uid = 0
         self.source_code = io.StringIO()
+        # Default settings
+        self.source_code.write(f"proto = {self.proto}\n")
         self.source_code.write(f"fix_imports = {self.fix_imports}\n")
         
     def log(self, name, stat):
@@ -61,9 +63,7 @@ class Convert(pickle._Unpickler):
     def load_stack_global(self):
         name = self.stack.pop()
         module = self.stack.pop()
-        if type(name) is ObjRep: name = f"{name}"
-        if type(module) is ObjRep: module = f"{module}"
-        if type(name) is not str or type(module) is not str:
+        if type(name) not in (str, ObjRep) or type(module) not in (str, ObjRep):
             raise UnpicklingError("STACK_GLOBAL requires str")
         self.append(self.find_class(module, name))
     pickle._Unpickler.dispatch[STACK_GLOBAL[0]] = load_stack_global
