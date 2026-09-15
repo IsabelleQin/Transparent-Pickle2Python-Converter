@@ -42,13 +42,13 @@ def __main__():
     args = parser.parse_args()
 
     if args.framework == "pickle":
-        from core.pickle import generate, execute
+        from framework.pickle import generate, execute
     elif args.framework == "dill":
-        from core.dill import generate, execute
+        from framework.dill import generate, execute
     elif args.framework == "torch":
-        from core.torch import generate, execute
+        from framework.torch import generate, execute
     elif args.framework == "nemo":
-        from core.nemo import generate, execute
+        from framework.nemo import generate, execute
 
     if args.mode == "generate":
         if not args.checkpoint:
@@ -60,22 +60,22 @@ def __main__():
         except Exception as e:
             raise e
         
-    if args.mode == "execute":
+    elif args.mode == "execute":
         if not args.checkpoint and args.framework in ["torch", "nemo"]:
             raise ValueError("Please provide path to the checkpoint!")
         if not args.output_path:
             raise ValueError("Please provide path to the generated code!")
         try:
             if args.framework == "torch":
-                execute(args.checkpoint, args.output_path)
+                return execute(args.checkpoint, args.output_path)
             elif args.framework == "nemo":
                 if not args.model_module or not args.model_class:
                     raise ValueError("Module and class import are required for NeMo model reconstruction!")
                 module = importlib.import_module(args.model_module)
                 model_cls = getattr(module, args.model_class)
-                execute(model_cls, args.checkpoint, args.output_path)
+                return execute(model_cls, args.checkpoint, args.output_path)
             else:
-                execute(args.output_path)
+                return execute(args.output_path)
         except Exception as e:
             raise e
         
