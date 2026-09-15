@@ -49,8 +49,11 @@ python main.py execute pickle -o source_code.py
 - nemo-toolkit=3.0.0
 
 ## Additional Comments
+### What is Pickle? 
+See (pickle — Python object serialization)[https://docs.python.org/3/library/pickle.html].
+
 ### Why Pickle?
-It is a popular serialization format, but it is not safe.
+It is a popular serialization format, but it is not safe. 
 
 ### What is the benefit of converting Pickle to Python code?
 Pickle-based files are essentially binary blobs that are hard to comprehend directly. 
