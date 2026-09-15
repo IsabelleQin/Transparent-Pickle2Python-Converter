@@ -50,7 +50,7 @@ python main.py execute pickle -o source_code.py
 
 ## Additional Comments
 ### What is Pickle? 
-See (pickle — Python object serialization)[https://docs.python.org/3/library/pickle.html].
+See [pickle — Python object serialization](https://docs.python.org/3/library/pickle.html).
 
 ### Why Pickle?
 It is a popular serialization format, but it is not safe. 
